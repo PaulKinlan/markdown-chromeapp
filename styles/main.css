@@ -1,0 +1,79 @@
+/* Will be compiled down to a single stylesheet with your sass files */
+body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding:0;
+}
+
+#drag {
+  -webkit-app-region: drag;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  background-color: transparent;
+  padding: 5px;
+  margin: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  box-shadow: 1px 0px 10px #111;
+}
+
+#drag:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 0px 10px #111;
+}
+
+#drag img {
+  -webkit-transition: all 0.2s ease-in-out;
+  opacity: 0.3;
+}
+
+#drag:hover img:hover {
+  opacity: 1;
+}
+
+
+#html {
+  box-shadow: -5px 0px 10px #000;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+textarea {
+  left: 0;
+  background-color: rgb(50, 50, 50);
+  color: white;
+  width: 50%;
+  height: 100%;
+  resize: none;
+  top: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+  z-index: -1; 
+  padding: 10px 10px 10px 54px;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+textarea, input { outline: none; }
+textarea:focus {outline: none;
+ outline-color: transparent;
+-webkit-highlight: none;
+-webkit-tap-highlight-color: transparent;
+
+ }
