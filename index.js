@@ -7,6 +7,8 @@ onload = function() {
   var print = document.getElementById("print"); 
 
   var md = require( "markdown" ).markdown;
+
+  var fileReference;
   
   mdEl.onkeypress = function() {
     var output = md.toHTML( mdEl.value );
@@ -21,6 +23,7 @@ onload = function() {
   open.onclick = function() {
     chrome.fileSystem.chooseEntry({ type: "openWritableFile" }, function(fileEntry) {
       if(!!fileEntry == false) return;
+      fileReference = fileEntry;
 
       fileEntry.file(function(theFile) {
         var reader = new FileReader();
@@ -35,5 +38,34 @@ onload = function() {
         reader.readAsText(theFile);
       });
     });
+  };
+
+  var saveMarkdown = function(fileEntry) {
+    var blobData = new Array(mdEl.value.length);
+    for(var i = 0; i < mdEl.value.length; i++) {
+      blobData[i] = mdEl.value[i];//.charCodeAt(i);
+    }
+       
+    var blob = new Blob(blobData);
+    blob.type = "text/plain";
+        
+    fileEntry.createWriter(function(writer) {
+      writer.truncate(function() { });
+
+      writer.write(blob);
+    });
+  };
+
+  save.onclick = function() {
+    if(!!fileReference == false) {
+      chrome.fileSystem.chooseEntry({ type: "saveFile" }, function(fileEntry) {
+        if(!!fileEntry == false) return;
+        fileReference = fileEntry;
+        saveMarkdown(fileReference); 
+      });
+    }
+    else {
+      saveMarkdown(fileReference); 
+    } 
   };
 };
